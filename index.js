@@ -1,3 +1,4 @@
+// Imports
 import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
@@ -8,16 +9,14 @@ import cors from 'cors'
 // Routes
 import ToDoRoutes from './routes/ToDoRoutes.js'
 import AuthRoutes from './routes/AuthRoutes.js'
-
+dotenv.config();
 
 const app = express()
 
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors())
+app.use(cors({ credentials: true, origin: process.env.ORIGIN }))
 app.use(express.json());
-dotenv.config();
-
 
 const connect = async () => {
     mongoose

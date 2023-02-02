@@ -85,11 +85,12 @@ export default class UserController {
   }
 
   static async login(req, res) {
+
     const username = req.body.username
     const password = req.body.password
 
     if (!username) {
-      res.status(422).json({ message: 'O nome de usuario obrigatório!' })
+      res.status(422).json({ message: 'O nome de usuario é obrigatório!' })
       return
     }
 
@@ -99,7 +100,7 @@ export default class UserController {
     }
 
     // check if user exists
-    const user = await User.findOne({ username:username })
+    const user = await User.findOne({ username: username })
 
     if (!user) {
       return res
@@ -116,22 +117,4 @@ export default class UserController {
 
     await createUserToken(user, req, res)
   }
-
-  static async checkUser(req, res) {
-    let currentUser
-
-    if (req.headers.authorization) {
-      const token = getToken(req)
-      const decoded = jwt.verify(token, 'nossosecret')
-
-      currentUser = await User.findById(decoded.id)
-
-      currentUser.password = undefined
-    } else {
-      currentUser = null
-    }
-
-    res.status(200).json({currentUser})
-  }
-
 }
