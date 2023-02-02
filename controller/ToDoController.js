@@ -2,17 +2,15 @@ import ToDoModel from '../models/ToDoModel.js'
 
 export const getAllToDo = async (req, res) => {
     const todo = await ToDoModel.find();
-    res.json(todo);
+    return res.json(todo);
 }
 export const getAllToDoDone = async (req, res) => {
     const todo = await ToDoModel.find({ done: true });
-    res.json(todo);
-
-
+    return res.json(todo);
 }
 export const getAllToDoNotDone = async (req, res) => {
     const todo = await ToDoModel.find({ done: false });
-    res.json(todo);
+    return res.json(todo);
 
 
 }
@@ -42,7 +40,7 @@ export const deleteToDo = async (req, res) => {
             .then(() => res.status(200).send("Task deletada com sucesso!"))
             .catch((err) => console.log(err));
     } catch (error) {
-        res.status(301).json({message:"Task deletada!"})
+        return res.status(301).json({ message: "Task deletada!" })
     }
 }
 export const updateToDo = async (req, res) => {
@@ -56,7 +54,7 @@ export const updateToDo = async (req, res) => {
             .then(() => res.status(200).send("Task alterada com sucesso!"))
             .catch((err) => console.log(err));
     } catch (error) {
-        res.status(301).json({message:"Task deletada"})
+        return res.status(301).json({ message: "Task deletada" })
     }
 }
 export const completeTodo = async (req, res) => {
