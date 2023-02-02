@@ -1,9 +1,9 @@
 // get token from headers
-const getToken = (req) => {
+const getToken = (req,res) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
 
-  return token;
+  return res.json(token);
 };
 
 export default getToken;

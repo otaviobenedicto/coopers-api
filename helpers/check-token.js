@@ -12,7 +12,7 @@ export default checkToken = (req, res, next) => {
     req.user = verified;
     next(); // to continue the flow
   } catch (err) {
-    res.status(400).json({ message: "O Token é inválido!" });
+    return res.status(400).json({ message: "O Token é inválido!" });
   }
 };
 

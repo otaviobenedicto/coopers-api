@@ -1,16 +1,19 @@
 import ToDoModel from '../models/ToDoModel.js'
 
 export const getAllToDo = async (req, res) => {
-    const todo = await ToDoModel.find();
-    return res.json(todo);
+    await ToDoModel.find()
+        .then(data => res.status(200).json(data))
+        .catch(err => res.status(402).json({ message: err }));
 }
 export const getAllToDoDone = async (req, res) => {
-    const todo = await ToDoModel.find({ done: true });
-    return res.json(todo);
+    await ToDoModel.find({ done: true })
+        .then(data => res.status(200).json(data))
+        .catch(err => res.status(402).json({ message: err }));
 }
 export const getAllToDoNotDone = async (req, res) => {
-    const todo = await ToDoModel.find({ done: false });
-    return res.json(todo);
+    await ToDoModel.find({ done: false })
+        .then(data => res.status(200).json(data))
+        .catch(err => res.status(402).json({ message: err }));
 }
 export const saveToDo = async (req, res) => {
 
@@ -49,7 +52,7 @@ export const updateToDo = async (req, res) => {
             .findByIdAndUpdate(_id, {
                 task: task
             })
-            .then(() => res.status(200).send("Task alterada com sucesso!"))
+            .then(() => res.status(200).json({ message: "Task alterada com sucesso!" }))
             .catch((err) => res.status(401).json({ message: err }));
     } catch (error) {
         return res.status(301).json({ message: "Task deletada" })

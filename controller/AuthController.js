@@ -120,8 +120,6 @@ export default class UserController {
   static async checkUser(req, res) {
     let currentUser
 
-    console.log(req.headers.authorization)
-
     if (req.headers.authorization) {
       const token = getToken(req)
       const decoded = jwt.verify(token, 'nossosecret')
@@ -133,7 +131,7 @@ export default class UserController {
       currentUser = null
     }
 
-    res.status(200).send(currentUser)
+    res.status(200).json({currentUser})
   }
 
 }
