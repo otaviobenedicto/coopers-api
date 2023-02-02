@@ -4,7 +4,6 @@ import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 import bodyparser from 'body-parser'
 import cors from 'cors'
-import morgan from 'morgan'
 
 // Routes
 import ToDoRoutes from './routes/ToDoRoutes.js'
@@ -15,9 +14,8 @@ const app = express()
 
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors({ credentials: true, origin: 'http://localhost:3000' }))
+app.use(cors())
 app.use(express.json());
-app.use(morgan('tiny'))
 dotenv.config();
 
 
@@ -29,7 +27,6 @@ const connect = async () => {
     })
     .then(() => console.log("Mongodb Connected..."))
     .catch((err) => console.error(err));
-
 }
 
 app.use("/todo",ToDoRoutes)

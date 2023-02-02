@@ -16,12 +16,6 @@ export const getAllToDoNotDone = async (req, res) => {
 
 
 }
-export const getToDo = async (req, res) => {
-    const { id } = req.params;
-
-    const todo = await ToDoModel.findById(id);
-    res.json(todo)
-}
 export const saveToDo = async (req, res) => {
 
     const { task, done = false } = req.body;
@@ -48,10 +42,9 @@ export const deleteToDo = async (req, res) => {
             .then(() => res.status(200).send("Task deletada com sucesso!"))
             .catch((err) => console.log(err));
     } catch (error) {
-        res.status(301).json(req.params)
+        res.status(301).json({message:"Task deletada!"})
     }
 }
-
 export const updateToDo = async (req, res) => {
     const { _id, task } = req.body
 
@@ -63,11 +56,9 @@ export const updateToDo = async (req, res) => {
             .then(() => res.status(200).send("Task alterada com sucesso!"))
             .catch((err) => console.log(err));
     } catch (error) {
-        res.status(301).json(req.params)
+        res.status(301).json({message:"Task deletada"})
     }
 }
-
-
 export const completeTodo = async (req, res) => {
 
     const { _id } = req.body
@@ -76,9 +67,6 @@ export const completeTodo = async (req, res) => {
         res.status(401).json({ message: "Id não adicionado" })
         return
     }
-
-    console.log('id = ', _id)
-
     ToDoModel.findByIdAndUpdate(_id, {
         done: true
     })
