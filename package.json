@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "pretest": "nodemon localhost Server.js"
+    "pretest": "nodemon localhost index.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

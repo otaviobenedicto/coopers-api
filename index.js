@@ -17,21 +17,21 @@ const app = express()
 
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors({ credentials: true, origin: process.env.ORIGIN }))
+app.use(cors())
 app.use(express.json());
 
 
 const connect = async () => {
     mongoose
-    .connect(process.env.MONGO_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
-    .then((db) => console.log("Mongodb Connected on",db.connection.host))
-    .catch((err) => console.error(err));
+        .connect(process.env.MONGO_URL, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        })
+        .then((db) => console.log("Mongodb Connected on", db.connection.host))
+        .catch((err) => console.error(err));
 }
 
-app.use("/todo",ToDoRoutes)
+app.use("/todo", ToDoRoutes)
 app.use("/users", AuthRoutes)
 
 const PORT = process.env.PORT || 5000
