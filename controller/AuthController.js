@@ -56,10 +56,10 @@ export default class UserController {
     }
 
     // check if user exists
-    const userExists = await User.findOne({ email: email })
+    const userExists = await User.findOne({ username: username })
 
     if (userExists) {
-      res.status(422).json({ message: 'Por favor, utilize outro e-mail!' })
+      res.status(422).json({ message: 'Por favor, utilize outro username' })
       return
     }
 
@@ -125,7 +125,7 @@ export default class UserController {
 
     if (req.headers.authorization) {
       const token = getToken(req)
-      const decoded = jwt.verify(token, 'nossosecret')
+      const decoded = jwt.verify(token, process.env.SECRET_JWT)
 
       currentUser = await User.findById(decoded.id)
 

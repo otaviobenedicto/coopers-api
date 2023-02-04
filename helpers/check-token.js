@@ -8,7 +8,7 @@ export default checkToken = (req, res, next) => {
   if (!token) return res.status(401).json({ message: "Acesso negado!" });
 
   try {
-    const verified = jwt.verify(token, "nossosecret");
+    const verified = jwt.verify(token, process.env.SECRET_JWT);
     req.user = verified;
     next(); // to continue the flow
   } catch (err) {
