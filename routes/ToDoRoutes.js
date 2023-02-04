@@ -2,10 +2,8 @@ import express from 'express'
 import { saveToDo,
      deleteToDo,
      getAllToDo, 
-     deleteAllToDo, 
-     getAllToDoDone, 
-     deleteAllToDoDone, 
-     getAllToDoNotDone,
+     deleteAllToDo,  
+     deleteAllToDoDone,
      completeTodo,
      updateToDo,
      getToDo,
@@ -21,8 +19,6 @@ router.post('/delete', deleteToDo)
 router.post('/edit', updateToDo)
 router.post('/complete', completeTodo)
 router.get('/all', getAllToDo)
-router.get('/notDone', getAllToDoNotDone)
-router.get('/allDone', getAllToDoDone)
 router.post('/getTodo', getToDo)
 
 export default router

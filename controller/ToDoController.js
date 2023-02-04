@@ -16,16 +16,6 @@ export const getToDo = async (req, res) => {
         .then(data => res.status(200).json(data))
         .catch(err => res.status(402).json({ message: err }));
 }
-export const getAllToDoDone = async (req, res) => {
-    await ToDoModel.find({ done: true })
-        .then(data => res.status(200).json(data))
-        .catch(err => res.status(402).json({ message: err }))
-}
-export const getAllToDoNotDone = async (req, res) => {
-    await ToDoModel.find({ done: false })
-        .then(data => res.status(200).json(data))
-        .catch(err => res.status(402).json({ message: err }));
-}
 export const saveToDo = async (req, res) => {
 
     const { task, done = false } = req.body;
