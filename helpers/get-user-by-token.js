@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 import User from '../models/AuthModel.js'
 
 // get user by jwt token
-const getUserByToken = async (req, res, token) => {
+const getUserByToken = async (token) => {
   if (!token) return res.status(401).json({ error: "Acesso negado!" });
 
   // find user
@@ -13,6 +13,6 @@ const getUserByToken = async (req, res, token) => {
 
   const user = await User.findOne({ _id: userId });
 
-  return res.status(user);
+  return user;
 };
 export default getUserByToken;

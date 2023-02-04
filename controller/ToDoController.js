@@ -5,10 +5,21 @@ export const getAllToDo = async (req, res) => {
         .then(data => res.status(200).json(data))
         .catch(err => res.status(402).json({ message: err }));
 }
+export const getToDo = async (req, res) => {
+    const { _id } = req.body
+    
+    if (!_id) {
+        return res.status(402).json({ message: "ID não adicionado!" })
+    }
+
+    await ToDoModel.findById(_id)
+        .then(data => res.status(200).json(data))
+        .catch(err => res.status(402).json({ message: err }));
+}
 export const getAllToDoDone = async (req, res) => {
     await ToDoModel.find({ done: true })
         .then(data => res.status(200).json(data))
-        .catch(err => res.status(402).json({ message: err }));
+        .catch(err => res.status(402).json({ message: err }))
 }
 export const getAllToDoNotDone = async (req, res) => {
     await ToDoModel.find({ done: false })
@@ -39,9 +50,9 @@ export const deleteToDo = async (req, res) => {
         ToDoModel
             .findByIdAndDelete(_id)
             .then(() => res.status(200).json({ message: "Task deletada com sucesso!" }))
-            .catch((err) => res.status(401).json({ message: err }));
+            .catch((err) => res.status(401).json({ message: err }))
     } catch (error) {
-        return res.status(301).json({ message: "Task deletada!" })
+        return res.status(301).json({ message: error })
     }
 }
 export const updateToDo = async (req, res) => {
@@ -55,7 +66,7 @@ export const updateToDo = async (req, res) => {
             .then(() => res.status(200).json({ message: "Task alterada com sucesso!" }))
             .catch((err) => res.status(401).json({ message: err }));
     } catch (error) {
-        return res.status(301).json({ message: "Task deletada" })
+        return res.status(301).json({ message: error })
     }
 }
 export const completeTodo = async (req, res) => {
@@ -63,7 +74,7 @@ export const completeTodo = async (req, res) => {
     const { _id } = req.body
 
     if (!_id) {
-        res.status(401).json({ message: "Id não adicionado" })
+        res.status(401).json({ message: "Id nÃ£o adicionado" })
         return
     }
     ToDoModel.findByIdAndUpdate(_id, {

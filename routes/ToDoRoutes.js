@@ -1,16 +1,15 @@
 import express from 'express'
-import {
-    saveToDo,
-    deleteToDo,
-    getAllToDo,
-    deleteAllToDo,
-    getAllToDoDone,
-    deleteAllToDoDone,
-    getAllToDoNotDone,
-    completeTodo,
-    updateToDo,
-    deleteAllToDoNotDone
-} from '../controller/ToDoController.js'
+import { saveToDo,
+     deleteToDo,
+     getAllToDo, 
+     deleteAllToDo, 
+     getAllToDoDone, 
+     deleteAllToDoDone, 
+     getAllToDoNotDone,
+     completeTodo,
+     updateToDo,
+     getToDo,
+    deleteAllToDoNotDone} from '../controller/ToDoController.js'
 
 const router = express.Router()
 
@@ -24,5 +23,6 @@ router.post('/complete', completeTodo)
 router.get('/all', getAllToDo)
 router.get('/notDone', getAllToDoNotDone)
 router.get('/allDone', getAllToDoDone)
+router.post('/getTodo', getToDo)
 
 export default router

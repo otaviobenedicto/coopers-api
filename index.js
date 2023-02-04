@@ -1,4 +1,6 @@
-// Imports
+dotenv.config();
+
+// Import packages
 import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
@@ -9,8 +11,8 @@ import cors from 'cors'
 // Routes
 import ToDoRoutes from './routes/ToDoRoutes.js'
 import AuthRoutes from './routes/AuthRoutes.js'
-dotenv.config();
 
+// APP
 const app = express()
 
 app.use(bodyparser.urlencoded({ extended: true }));
@@ -18,13 +20,14 @@ app.use(cookieParser());
 app.use(cors({ credentials: true, origin: process.env.ORIGIN }))
 app.use(express.json());
 
+
 const connect = async () => {
     mongoose
     .connect(process.env.MONGO_URL, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
-    .then(() => console.log("Mongodb Connected..."))
+    .then((db) => console.log("Mongodb Connected on",db.connection.host))
     .catch((err) => console.error(err));
 }
 
