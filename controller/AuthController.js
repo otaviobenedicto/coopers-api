@@ -11,42 +11,7 @@ import createUserToken from '../helpers/create-user-token.js'
 export default class UserController {
   static async register(req, res) {
 
-    const name = req.body.name
-    const username = req.body.username
-    const email = req.body.email
-    const phone = req.body.phone
-    const password = req.body.password
-    const confirmpassword = req.body.confirmpassword
-
-    // validations
-    if (!name) {
-      res.status(422).json({ message: 'O nome é obrigatario!' })
-      return
-    }
-    if (!username) {
-      res.status(422).json({ message: 'O nome de usuario é obrigatario!' })
-      return
-    }
-
-    if (!email) {
-      res.status(422).json({ message: 'O e-mail é obrigatorio!' })
-      return
-    }
-
-    if (!phone) {
-      res.status(422).json({ message: 'O telefone é obrigatório!' })
-      return
-    }
-
-    if (!password) {
-      res.status(422).json({ message: 'A senha é obrigatória!' })
-      return
-    }
-
-    if (!confirmpassword) {
-      res.status(422).json({ message: 'A confirmação de senha é obrigatória!' })
-      return
-    }
+    const { name, username, email, phone, password, confirmpassword } = req.body
 
     if (password != confirmpassword) {
       res
@@ -86,18 +51,8 @@ export default class UserController {
   }
 
   static async login(req, res) {
-    const username = req.body.username
-    const password = req.body.password
 
-    if (!username) {
-      res.status(422).json({ message: 'O nome de usuario é obrigatório!' })
-      return
-    }
-
-    if (!password) {
-      res.status(422).json({ message: 'A senha é obrigatório!' })
-      return
-    }
+    const { username, password } = req.body
 
     // check if user exists
     const user = await User.findOne({ username: username })
@@ -120,9 +75,7 @@ export default class UserController {
 
   static async checkUser(req, res) {
     let currentUser
-
-    console.log(req.headers.authorization)
-
+    
     if (req.headers.authorization) {
       const token = getToken(req)
       const decoded = jwt.verify(token, process.env.SECRET_JWT)
