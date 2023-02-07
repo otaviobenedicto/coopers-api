@@ -1,13 +1,14 @@
 import ToDoModel from '../models/ToDoModel.js'
 
 export const getAllToDo = async (req, res) => {
-    await ToDoModel.find()
+    const { id } = req.params
+    await ToDoModel.find({ id: id })
         .then(data => res.status(200).json(data))
         .catch(err => res.status(402).json({ message: err }));
 }
 export const getToDo = async (req, res) => {
     const { _id } = req.body
-    
+
     if (!_id) {
         return res.status(402).json({ message: "ID não adicionado!" })
     }
@@ -18,7 +19,9 @@ export const getToDo = async (req, res) => {
 }
 export const saveToDo = async (req, res) => {
 
-    const { task, done = false } = req.body;
+    const { id } = req.params
+
+    const { task, done = false } = req.body
 
     if (!task) {
         res.status(401).json({ message: "Task não adicionada!" })
@@ -27,6 +30,7 @@ export const saveToDo = async (req, res) => {
 
     ToDoModel
         .create({
+            id: id,
             task: task,
             done: done
         })

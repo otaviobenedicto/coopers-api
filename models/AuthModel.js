@@ -19,7 +19,7 @@ const authSchema = new mongoose.Schema({
     },
     phone: {
         type: String,
-    },
+    }
 }, { timestamps: true });
 
 export default mongoose.model('User', authSchema);

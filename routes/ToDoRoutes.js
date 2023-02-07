@@ -11,14 +11,14 @@ import { saveToDo,
 
 const router = express.Router()
 
-router.post('/save', saveToDo)
+router.post('/save/:id', saveToDo)
 router.delete('/deleteAll', deleteAllToDo)
 router.delete('/deleteAllNotDone', deleteAllToDoNotDone)
 router.delete('/deleteAllDone', deleteAllToDoDone)
 router.post('/delete', deleteToDo)
 router.post('/edit', updateToDo)
 router.post('/complete', completeTodo)
-router.get('/all', getAllToDo)
+router.get('/all/:id', getAllToDo)
 router.post('/getTodo', getToDo)
 
 export default router
