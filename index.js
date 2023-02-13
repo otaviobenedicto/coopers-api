@@ -15,6 +15,7 @@ import AuthRoutes from './routes/AuthRoutes.js'
 
 // APP
 const app = express()
+
 app.use(compression())
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cookieParser());
