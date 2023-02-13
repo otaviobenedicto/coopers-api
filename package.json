@@ -16,7 +16,8 @@
     "dotenv": "^16.0.3",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.12"
+    "mongoose": "^5.12.12",
+    "compression": "1.7.4"
   },
   "keywords": [],
   "author": "",

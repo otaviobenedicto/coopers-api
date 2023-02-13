@@ -7,6 +7,7 @@ import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 import bodyparser from 'body-parser'
 import cors from 'cors'
+import compression from 'compression';
 
 // Routes
 import ToDoRoutes from './routes/ToDoRoutes.js'
@@ -14,7 +15,7 @@ import AuthRoutes from './routes/AuthRoutes.js'
 
 // APP
 const app = express()
-
+app.use(compression())
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors())
